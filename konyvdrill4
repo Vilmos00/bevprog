@@ -1,0 +1,70 @@
+#include "std_lib_facilities.h"
+
+int main(){
+	double input;
+	
+	double min = 0;
+	double minInCm = 0;
+	string minUnit = "cm";
+	
+	double max = 0;
+	double maxInCm = 0;
+	string maxUnit = "cm";
+	
+	string unit = "";
+	
+	double sum = 0;
+	vector <double> inputValues;
+	int valuesEntered = 0;
+	
+	while(cin >> input >> unit) {	
+		cout << endl;
+		
+		if (unit == "cm" || unit == " cm" || unit == "m" || unit == " m" || unit == "in" || unit == " in" || unit == "ft" || unit == " ft"){
+			double inputValueInCm = 0;
+			++valuesEntered;
+			
+			if (unit == "cm" || unit == " cm") {
+				inputValueInCm = input;
+				
+			} else if (unit == "m" || unit == " m") {
+				inputValueInCm = input*100;
+			
+			} else if (unit == "in" || unit == " in") {
+				inputValueInCm = input * 2.54;
+			
+			} else if (unit == "ft" || unit == " ft") {
+				inputValueInCm = input * 30.48;
+			}
+			
+			sum = inputValueInCm;
+			inputValues.push_back(inputValueInCm/100);
+			
+			if (inputValueInCm < minInCm) {
+				min = input;
+				minInCm = inputValueInCm;
+				minUnit = unit;
+				cout << input << unit << " the smallest one so far" << endl << endl;
+				
+			} else if (inputValueInCm > maxInCm) {
+				max = input;
+				maxInCm = inputValueInCm;
+				maxUnit = unit;
+				cout << input << unit << " the biggest one so far" << endl << endl;
+			}
+		} else {
+			cout << "Wrong input. Only cm m in ft" << endl;
+		}
+
+	}
+	
+	cout << "smallest number:  " << min << " " + minUnit << endl;
+	cout << "largest number:   " << max << " " + maxUnit << endl;
+	cout << "number of values: " << valuesEntered << endl;
+	cout << "sum of values:    " << sum/100  << " m" << endl; 
+	
+	sort(inputValues);
+	for(int i = 0; i < inputValues.size();++i){
+		cout << inputValues[i] << " m" << endl;
+	}
+}
